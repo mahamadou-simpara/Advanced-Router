@@ -27,6 +27,7 @@ import Layouts from './pages/Layouts';
 import EventDetailPage from './pages/EventDetail';
 import NewEventPage from './pages/NewEvent';
 import EditEventPage from './pages/EditEvent';
+import ErrorPage from './pages/Error';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
     {
       path: '/',
       element: <Layouts />,
+      errorElement: <ErrorPage /> ,
       children: [
         {path: '/',  element: <HomePage />},
         {path: '/events', element: <EventsPage /> },
