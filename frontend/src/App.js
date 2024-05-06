@@ -28,6 +28,7 @@ import EventDetailPage from './pages/EventDetail';
 import NewEventPage from './pages/NewEvent';
 import EditEventPage from './pages/EditEvent';
 import ErrorPage from './pages/Error';
+import EventsRoot from './pages/EventsRoot';
 
 
 function App() {
@@ -35,13 +36,25 @@ function App() {
     {
       path: '/',
       element: <Layouts />,
-      errorElement: <ErrorPage /> ,
+      errorElement: <ErrorPage />,
       children: [
         {path: '/',  element: <HomePage />},
-        {path: '/events', element: <EventsPage /> },
-        {path: '/events/:eventId', element: <EventDetailPage /> },
-        {path: '/events/:eventId', element: <NewEventPage /> },
-        {path: '/events/:eventId/edit', element: <EditEventPage /> }
+        {path: 'events', element: <EventsRoot />, children: [
+          {index: true, element: <EventsPage />, loader: async () => {
+            const response = await fetch('http://localhost:8080/events');
+
+            if (!response.ok) {
+            // Let's work on this later !
+            } else {
+            const resData = await response.json();
+            return resData.events;
+            }
+    
+          }},
+          {path: ':eventId', element: <EventDetailPage /> },
+          {path: 'new', element: <NewEventPage /> },
+          {path: ':eventId/edit', element: <EditEventPage /> }
+        ]},
       ]
     }
   ]);
