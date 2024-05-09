@@ -28,6 +28,8 @@ export const loader = async () => {
 
         // throw { message: 'Could not fetch the data !'}  Second way I can check if there is an error, this one needs an errorElement: <ErrorPage /> which is an attribute for the Router.
 
+        throw new Response(JSON.stringify({message: 'Something occured !'}), {status: 500})
+
         } else {
         const resData = await response.json();
         return resData.events;
