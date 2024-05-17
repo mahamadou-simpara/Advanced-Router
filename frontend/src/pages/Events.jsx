@@ -21,7 +21,8 @@ export default EventsPage;
 
 
 export const loader = async () => {
-        const response = await fetch('http://localhost:8080/eventsss');
+        const response = await fetch('http://localhost:8080/events');
+
 
         if (!response.ok) {
         // return { isError: true, message: 'Could not fetch the data !'} First way I can check if there is an error or not.
