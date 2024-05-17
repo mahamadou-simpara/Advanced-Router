@@ -1,16 +1,22 @@
 import {useParams } from 'react-router-dom';
+import EventForm from '../components/EventForm';
 
 function EditEventPage () {
 
     const params = useParams();
 
-
+    console.log(params.eventId);
 
     return <>
-    <h1>Edit Event Page</h1>
-    <p>{params}</p>
+    <EventForm />
     </> 
 }
 
 
+
 export default EditEventPage;
+
+
+export const loader = () => {
+    fetch('http://localhost')
+}

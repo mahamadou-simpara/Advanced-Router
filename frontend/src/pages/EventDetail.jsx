@@ -1,15 +1,29 @@
-import { useParams } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
+import EventItem from '../components/EventItem';
 
 
-function EventDetailPage () {
-    const params = useParams();
 
-    console.log(params);
-    return <main>
-    <h1>Event Detail Page</h1>
-     <p>{params.eventId}</p>
+function EventDetailPage() {
+  const data = useLoaderData();
+
+
+  return (
+    <main>
+        <EventItem event={data.event}/>
     </main>
+  );
 }
 
-
 export default EventDetailPage;
+
+export const loader = async ({request, params}) => {
+    const id = params.eventId;
+  
+  
+    const response = await fetch(`http://localhost:8080/events/${id}`);
+  
+    if (!response.ok) {
+    } else {
+      return response;
+    }
+  };
