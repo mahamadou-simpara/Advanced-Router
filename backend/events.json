@@ -1,11 +1,1 @@
-{
-  "events": [
-    {
-      "id": "e1",
-      "title": "A dummy event",
-      "date": "2023-02-22",
-      "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
-      "description": "Join this amazing event and connect with fellow developers."
-    }
-  ]
-}
+{"events":[{"title":"Event 1","description":"Description ","image":"https://www.elementalproduction.com/wp-content/uploads/2021/05/corporate-events.jpg","date":"2024-06-21","id":"72c50616-9e3d-46be-ad00-b5d8353fbed3"},{"title":"Test","description":"Test to see","image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmJNVw2UCkovJgWcfRLMQcYj13ht1DGB18ufPi_NZprw&s","date":"2024-06-06","id":"dd3b1313-b23d-4363-8400-b945d9178a95"}]}

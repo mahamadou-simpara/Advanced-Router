@@ -3,8 +3,7 @@ import classes from './EventItem.module.css';
 
 function EventItem({ event }) {
   function startDeleteHandler() {
-    // ...
-
+ 
   }
 
   return (
