@@ -12,7 +12,7 @@ function EventsPage() {
 
   return (
     <>
-     <EventsList events={events} />
+     {events.length > 0 ? <EventsList events={events} /> : <h1 style={{textAlign: 'center'}}>No events available yet </h1> }
     </>
   );
 }

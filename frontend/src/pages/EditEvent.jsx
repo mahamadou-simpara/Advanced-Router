@@ -1,14 +1,12 @@
-import {useParams } from 'react-router-dom';
+import { json, useLoaderData } from 'react-router-dom';
 import EventForm from '../components/EventForm';
 
 function EditEventPage () {
 
-    const params = useParams();
-
-    console.log(params.eventId);
+    const data = useLoaderData();
 
     return <>
-    <EventForm />
+    <EventForm event={data.event}/>
     </> 
 }
 
@@ -17,6 +15,14 @@ function EditEventPage () {
 export default EditEventPage;
 
 
-export const loader = () => {
-    fetch('http://localhost')
+export const loader = async ({request, params}) => {
+    const id = params.eventId;
+
+    const response = await fetch(`http://localhost:8080/events/${id}`);
+
+    if(!response.ok){
+        throw json({message: 'Failed to load the selected items data'}, {status: 500});
+    }else{
+        return response;
+    }
 }
