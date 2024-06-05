@@ -25,10 +25,11 @@ import HomePage from './pages/Home';
 import EventsPage, {loader as eventsLoader} from './pages/Events';
 import Layouts from './pages/Layouts';
 import EventDetailPage, { loader as eventDetailLoader, action as eventDeleteAction } from './pages/EventDetail.jsx';
-import NewEventPage, {action as NewEventAction} from './pages/NewEvent';
+import NewEventPage from './pages/NewEvent';
 import EditEventPage, {loader as editEventLoader} from './pages/EditEvent';
 import ErrorPage from './pages/Error';
 import EventsRoot from './pages/EventsRoot';
+import {action as submitEventData} from './components/EventForm.js'
 
 
 function App() {
@@ -46,9 +47,9 @@ function App() {
           loader: eventDetailLoader, 
           children: [
             {index: true, element: <EventDetailPage />, loader: eventDetailLoader, action: eventDeleteAction },
-            {path: 'edit', element: <EditEventPage />, loader: editEventLoader}
+            {path: 'edit', element: <EditEventPage />, loader: editEventLoader, action: submitEventData}
           ]},
-          {path: 'new', element: <NewEventPage />, action: NewEventAction },
+          {path: 'new', element: <NewEventPage />, action: submitEventData },
         ]},
       ]
     }

@@ -1,4 +1,4 @@
-import { Form, useNavigate, useNavigation } from 'react-router-dom';
+import { Form, useNavigate, useNavigation, redirect, json } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 
@@ -12,7 +12,7 @@ function EventForm({ method, event }) {
   }
 
   return (
-    <Form method="POST" className={classes.form}>
+    <Form method={method} className={classes.form}>
       <p>
         <label htmlFor="title">Title</label>
         <input
@@ -57,10 +57,47 @@ function EventForm({ method, event }) {
         <button type="button" disabled={isSubmitting} onClick={cancelHandler}>
           Cancel
         </button>
-        <button disabled={isSubmitting}>Save</button>
+        <button disabled={isSubmitting}>{isSubmitting ? 'Submitting...' : 'Save'}</button>
       </div>
     </Form>
   );
 }
 
 export default EventForm;
+
+
+export async function action({ request, params }) {
+  const submittedData = await request.formData();
+
+  const method = request.method;
+
+  console.log(method);
+
+  const eventData = {
+    title: submittedData.get('title'),
+    description: submittedData.get('description'),
+    image: submittedData.get('image'),
+    date: submittedData.get('date')
+  };
+
+  let url = 'http://localhost:8080/events';
+  if(method === 'PATCH'){
+    const id = params.eventId;
+
+    url = 'http://localhost:8080/events/' + id
+  }
+
+  const response = fetch(url, {
+    method: method,
+    body: JSON.stringify(eventData),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  if(!(await response).ok){
+    throw json({message: 'Failed to save the event'}, {status: 500})
+  }
+
+  return redirect('/events');
+}
